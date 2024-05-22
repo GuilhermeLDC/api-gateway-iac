@@ -129,7 +129,7 @@ resource "aws_lambda_function" "lambda_verify_auth" {
 resource "aws_cognito_user_pool" "pool" {
   alias_attributes           = null
   auto_verified_attributes   = ["email"]
-  deletion_protection        = "ACTIVE"
+  deletion_protection        = "INACTIVE"
   email_verification_message = null
   email_verification_subject = null
   mfa_configuration          = "OFF"
@@ -260,8 +260,8 @@ resource "aws_api_gateway_method" "any" {
   rest_api_id   = aws_api_gateway_rest_api.rest_api.id
   resource_id   = aws_api_gateway_resource.api_resource.id
   http_method   = "ANY"
-  authorization = "COGNITO_USER_POOLS"
-  authorizer_id = aws_api_gateway_authorizer.authorizer.id
+  authorization = "NONE"
+  #authorizer_id = aws_api_gateway_authorizer.authorizer.id
 
   request_parameters = {
     "method.request.path.proxy" = true
